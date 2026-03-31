@@ -3,7 +3,7 @@
   Personal portfolio website built with HTML and CSS.
 
   ## Live Site
-  [View Portfolio](https://jcelestial.github.io)
+  [View Portfolio](https://jamesccelestial-ops.github.io)
 
   ## About
   IT Security Engineer with experience in endpoint security, IAM,
