@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>James C. Celestial — IT Security Engineer</title>
+  <style>
+    :root {
+      --bg:       #0a0e1a;
+      --bg2:      #0f1525;
+      --bg3:      #141c30;
+      --border:   #1e2d4a;
+      --green:    #00ff88;
+      --cyan:     #00c8ff;
+      --dim:      #3a5a7a;
+      --muted:    #5a7a9a;
+      --text:     #c8d8e8;
+      --white:    #eaf2ff;
+      --tag-bg:   #0a2040;
+      --tag-bd:   #1a4a7a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', 'Lucida Console', monospace;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { color: var(--green); text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 14, 26, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      backdrop-filter: blur(8px);
+    }
+    nav .brand {
+      color: var(--green);
+      font-weight: bold;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-right: auto;
+    }
+    nav a {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--green); text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 52px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+    .prompt-line {
+      color: var(--dim);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .prompt-line span { color: var(--green); }
+    header h1 {
+      color: var(--white);
+      font-size: 36px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    header h1 em {
+      color: var(--green);
+      font-style: normal;
+    }
+    header .title {
+      color: var(--cyan);
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 8px 0 24px;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .contact-row .item::before { content: '> '; color: var(--dim); }
+    .contact-row a { color: var(--muted); }
+    .contact-row a:hover { color: var(--cyan); }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 52px;
+      scroll-margin-top: 64px;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-label h2 {
+      color: var(--green);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SUMMARY ── */
+    .summary-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      padding: 20px 24px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .summary-box::before {
+      content: '// ABOUT';
+      display: block;
+      color: var(--dim);
+      font-size: 11px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    /* ── SKILLS ── */
+    .skill-group {
+      margin-bottom: 20px;
+    }
+    .skill-group-title {
+      color: var(--cyan);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .skill-group-title::before { content: '# '; color: var(--dim); }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-bd);
+      color: var(--text);
+      padding: 3px 10px;
+      font-size: 12px;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 36px;
+    }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: -36px;
+      width: 1px;
+      background: var(--border);
+    }
+    .exp-item:last-child::before { display: none; }
+    .exp-item::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border: 1px solid var(--green);
+      background: var(--bg);
+      border-radius: 50%;
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .exp-role {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .exp-company {
+      color: var(--cyan);
+      font-size: 13px;
+    }
+    .exp-dates {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+    .exp-bullets li {
+      color: var(--text);
+      padding: 2px 0 2px 18px;
+      position: relative;
+      font-size: 13px;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+    }
+    .exp-earlier {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 2px;
+    }
+    .exp-earlier-title {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .exp-earlier-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .exp-earlier-items li {
+      color: var(--text);
+      font-size: 12.5px;
+      padding-left: 16px;
+      position: relative;
+    }
+    .exp-earlier-items li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-color: var(--dim); }
+    .edu-degree {
+      color: var(--white);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      color: var(--cyan);
+      font-size: 12px;
+    }
+    .edu-year {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* ── CERT ── */
+    .cert-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg2);
+      border: 1px solid var(--green);
+      padding: 16px 24px;
+      border-radius: 2px;
+    }
+    .cert-badge {
+      color: var(--green);
+      font-size: 24px;
+    }
+    .cert-name {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .cert-code {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      color: var(--dim);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+    footer span { color: var(--green); }
+
+    /* ── PRINT ── */
+    @media print {
+      nav { display: none; }
+      body { background: #fff; color: #111; font-family: Arial, sans-serif; }
+      header h1, header .title { color: #111; }
+      .section-label h2 { color: #0a6; }
+      .tag { border: 1px solid #ccc; color: #333; }
+      .exp-bullets li::before { color: #0a6; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 10px 16px; gap: 16px; }
+      header h1 { font-size: 26px; }
+      .exp-dates { margin-left: 0; }
+      .cert-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="brand">JCC://</div>
+    <a href="#summary">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certs</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <div class="prompt-line"><span>root@portfolio</span>:~$ whoami</div>
+      <h1><em>James C.</em> Celestial</h1>
+      <div class="title">IT Security Engineer</div>
+      <div class="contact-row">
+        <span class="item">Mandaue City, Cebu, Philippines 6001</span>
+        <span class="item">09151635426</span>
+        <span class="item"><a href="mailto:jamesccelestial@gmail.com">jamesccelestial@gmail.com</a></span>
+        <span class="item"><a href="https://www.linkedin.com/in/james-cuyos-celestial-1337ab116/" target="_blank">LinkedIn</a></span>
+      </div>
+    </header>
+
+    <!-- SUMMARY -->
+    <section id="summary">
+      <div class="section-label"><h2>Professional Summary</h2></div>
+      <div class="summary-box">
+        IT Security Engineer with strong experience in endpoint security, IAM, vulnerability management, and cloud security posture management.
+        Skilled in Microsoft Defender, SentinelOne, Wiz, JAMF, Snyk, Intune, and Entra ID. Proven ability to improve Secure Score, manage identity
+        governance, strengthen device compliance, and support incident response operations. Adept in creating clear and accurate documentation,
+        runbooks, and security SOPs. Known for cross-team collaboration, problem-solving, and driving security remediation aligned with compliance requirements.
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label"><h2>Technical Skills</h2></div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Security, Endpoint &amp; Cloud Protection</div>
+        <div class="tags">
+          <span class="tag">Microsoft Defender for Endpoint</span>
+          <span class="tag">Defender for Office 365</span>
+          <span class="tag">Defender for Identity</span>
+          <span class="tag">Secure Score</span>
+          <span class="tag">SentinelOne EDR</span>
+          <span class="tag">JAMF Pro</span>
+          <span class="tag">Wiz CSPM</span>
+          <span class="tag">Snyk</span>
+          <span class="tag">Intune MDM/MAM</span>
+          <span class="tag">Windows Update Rings</span>
+          <span class="tag">Cloud Security Recommendations</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Identity &amp; Access Management</div>
+        <div class="tags">
+          <span class="tag">Azure AD / Entra ID</span>
+          <span class="tag">RBAC</span>
+          <span class="tag">Conditional Access</span>
+          <span class="tag">MFA</span>
+          <span class="tag">Identity Protection</span>
+          <span class="tag">Access Reviews</span>
+          <span class="tag">Lifecycle Workflows</span>
+          <span class="tag">Least-Privilege Role Assignments</span>
+          <span class="tag">User Provisioning</span>
+          <span class="tag">Device Identity</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Security Operations</div>
+        <div class="tags">
+          <span class="tag">Incident Response</span>
+          <span class="tag">Threat Investigation</span>
+          <span class="tag">Log Analysis</span>
+          <span class="tag">Vulnerability Assessment</span>
+          <span class="tag">Remediation Tracking</span>
+          <span class="tag">Compliance Monitoring</span>
+          <span class="tag">Audit Readiness</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Documentation</div>
+        <div class="tags">
+          <span class="tag">SOPs</span>
+          <span class="tag">Runbooks</span>
+          <span class="tag">Playbooks</span>
+          <span class="tag">Confluence Pages</span>
+          <span class="tag">Knowledge Base Articles</span>
+          <span class="tag">Shift Handover Reports</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Other Tools &amp; Platforms</div>
+        <div class="tags">
+          <span class="tag">Windows Server</span>
+          <span class="tag">Exchange Online</span>
+          <span class="tag">Microsoft Teams</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">QuickSight</span>
+          <span class="tag">Salesforce</span>
+          <span class="tag">HubSpot</span>
+          <span class="tag">Remote Support Tools</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-label"><h2>Professional Experience</h2></div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">IT Security Engineer</span>
+          <span class="exp-dates">Sep 2024 – Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Manage IAM operations including Conditional Access, access reviews, MFA enforcement, RBAC assignments, and identity protection alerts.</li>
+          <li>Implement, validate, and maintain security recommendations across Microsoft Defender, improving Secure Score across Endpoint, Identity, Office 365, and Entra.</li>
+          <li>Administer SentinelOne EDR — ensuring agent health, threat detection, policy optimization, and response actions.</li>
+          <li>Manage Wiz cloud exposures including IAM misconfigurations, open exposures, and compliance issues.</li>
+          <li>Review and triage Snyk vulnerabilities, conduct severity analysis, and coordinate resolution with development teams.</li>
+          <li>Perform device compliance validation using Intune and JAMF for Windows and macOS fleets.</li>
+          <li>Analyze sign-in logs, remediate Conditional Access issues, and troubleshoot device identity failures.</li>
+          <li>Lead Windows 11 upgrade validation covering compliance, IAM, policy configuration, and user readiness.</li>
+          <li>Create and maintain documentation including SOPs, runbooks, incident reports, and Confluence guides.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Help Desk Administrator</span>
+          <span class="exp-company">Talleco</span>
+          <span class="exp-dates">Sep 2022 – Jul 2024</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Delivered first-line support and access troubleshooting for end users.</li>
+          <li>Maintained documentation for recurring issues and technical procedures.</li>
+          <li>Ensured consistent service quality through accurate ticketing and knowledge sharing.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Desktop Support Engineer</span>
+          <span class="exp-company">Tata Consultancy Services (Manulife)</span>
+          <span class="exp-dates">Apr 2021 – Sep 2022</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Provided second-level Windows, software, and access troubleshooting.</li>
+          <li>Maintained technical documentation and knowledge articles.</li>
+          <li>Ensured minimal downtime and effective incident escalation.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Desktop Support Engineer</span>
+          <span class="exp-company">Phil Data Industries Inc. (IBM–FLUOR)</span>
+          <span class="exp-dates">Sep 2017 – Apr 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Supported hardware, software, and network issues along with user provisioning and access validation.</li>
+          <li>Documented device configurations and troubleshooting steps.</li>
+        </ul>
+      </div>
+
+      <div class="exp-earlier">
+        <div class="exp-earlier-title">Earlier Experience — 2014 to 2017</div>
+        <ul class="exp-earlier-items">
+          <li>IT Staff — Mactan Rock Industries Inc.</li>
+          <li>Technical Support OJT — Innoland Company</li>
+          <li>Clerk / Working Student — UV Maritime Training Center</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-label"><h2>Education &amp; Training</h2></div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Science in Information Technology</div>
+          <div class="edu-school">University of the Visayas</div>
+          <div class="edu-year">2012 – 2016</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">NC4 Java Programming</div>
+          <div class="edu-school">Call Center Academy</div>
+          <div class="edu-year">2016 – 2017</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">CCNA Training</div>
+          <div class="edu-school">Rivan School of Technology</div>
+          <div class="edu-year">2019</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">BOSH Safety Officer 1</div>
+          <div class="edu-school">QESH Training</div>
+          <div class="edu-year">2020</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+      <div class="section-label"><h2>Certifications</h2></div>
+      <div class="cert-card">
+        <div class="cert-badge">&#9737;</div>
+        <div>
+          <div class="cert-name">AWS Certified Cloud Practitioner</div>
+          <div class="cert-code">CLF-C02 &nbsp;|&nbsp; Amazon Web Services</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>James C. Celestial</span> &nbsp;·&nbsp; IT Security Engineer &nbsp;·&nbsp; Cebu, Philippines
+  </footer>
+
+</body>
+</html>
